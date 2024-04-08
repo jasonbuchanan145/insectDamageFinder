@@ -1,4 +1,3 @@
-
 import torchvision
 from torch import nn, optim
 from torch.utils.data import Dataset, DataLoader
@@ -76,14 +75,14 @@ def main():
 
     # Create an instance of the dataset
     aphid_dataset = AphidDamageDataset(img_dir=img_dir, transform=transform,debugMode=False)
-    dataLoader = DataLoader(aphid_dataset, batch_size=10, shuffle=True, collate_fn=my_collate_fn)
+    dataLoader = DataLoader(aphid_dataset, batch_size=16, shuffle=True, collate_fn=my_collate_fn)
     backbone = resnet_fpn_backbone(backbone_name='resnet152', weights=ResNet152_Weights.DEFAULT)
     model = FasterRCNN(backbone=backbone, num_classes=91)
     model.train()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
     optimizer = optim.SGD(model.parameters(), lr=0.005, momentum=0.9, weight_decay=0.0005)
-    for epoch in range(0, 20):
+    for epoch in range(0, 10):
         for images, targets in dataLoader:
             images = list(img.to(device) for img in images)
 

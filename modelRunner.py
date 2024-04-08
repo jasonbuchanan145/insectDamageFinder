@@ -27,7 +27,7 @@ pred_boxes = prediction[0]['boxes'].cpu().numpy()
 pred_labels = prediction[0]['labels'].cpu().numpy()
 pred_scores = prediction[0]['scores'].cpu().numpy()
 
-threshold = 0.5
+threshold = 0.6
 filtered_boxes = pred_boxes[pred_scores >= threshold]
 filtered_labels = pred_labels[pred_scores >= threshold]
 filtered_scores = pred_scores[pred_scores >= threshold]
